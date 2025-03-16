@@ -12,7 +12,7 @@ export async function middleware(request) {
  
   const { token } = JSON.parse(authCookie);
 
-  const apiUrl = new URL('app/api/verifytoken', request.url).toString();
+  const apiUrl = new URL('/app/api/verifytoken', request.url).toString();
 
   console.log(token);
   console.log("token.........")
