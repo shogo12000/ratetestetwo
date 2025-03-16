@@ -1,8 +1,13 @@
 'use client';
  
 import { useState } from "react";
+import { useAuth } from "../context/myContext";
+import { useRouter } from 'next/navigation'
+ 
 
 export function Login({ formType }) {
+    const router = useRouter();
+    const { setUserLogin } = useAuth();
     const [userName, setUserName] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
@@ -18,9 +23,7 @@ export function Login({ formType }) {
     };
     const handleForm = async (e) => {
         e.preventDefault();
-        console.log("Enviando dados:");
-        console.log(userEmail)
-        console.log(userPassword);
+ 
 
         try {
             const response = await fetch(`/api/${formType}`, {
@@ -33,12 +36,13 @@ export function Login({ formType }) {
                     userEmail: userEmail,
                     userPassword: userPassword,
                 })
-            })
+            })            
 
  
-
-            if(response.status === 200){
-
+            if(response.ok){
+                console.log("logado sucesso")
+                setUserLogin(true);
+                router.push("/");
             }else {
                 setUserMessage(messages[response.status]);
             }

@@ -34,12 +34,39 @@ export async function POST(req) {
         }
 
         const token = generateToken(userEmail);
-        console.log(token);
-
  
-        const response = NextResponse.json({ success: true }, { status: 200 });
+        const response = NextResponse.json({ success: true, userName: user.userName, userEmail: user.userEmail }, { status: 200 });
 
- 
+        response.cookies.set({
+            name: 'auth_token',
+            // value: token,
+            value: JSON.stringify({ token, userEmail }),
+            httpOnly: true,    
+            secure: process.env.APP_ENV === 'production',   
+            path: '/',       
+            sameSite: 'strict',  
+            maxAge: 36000,       
+        })
+
+        response.cookies.set({
+            name: "username",
+            value: user.userName,
+            httpOnly: false,  // Permite acesso no frontend
+            secure: process.env.APP_ENV === "production",
+            sameSite: "Lax",
+            maxAge: 60 * 60 * 10,
+            path: "/",
+        });
+
+        response.cookies.set({
+            name: "email",
+            value: user.userEmail,
+            httpOnly: false,  // Permite acesso no frontend
+            secure: process.env.APP_ENV === "production",
+            sameSite: "Lax",
+            maxAge: 60 * 60 * 10,
+            path: "/",
+        });
 
         return response;
 
