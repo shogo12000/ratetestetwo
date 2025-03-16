@@ -3,7 +3,7 @@ const { default: Link } = require("next/link")
 import { AuthContext } from "../context/myContext";
 import { useContext } from "react";
 
-const nav = ({ children }) => {
+const Nav = ({ children }) => {
     // const { userLogin } = useAuth();
     const { userLogin } = useContext(AuthContext);
     console.log("userLogin", userLogin)
@@ -34,4 +34,4 @@ const nav = ({ children }) => {
     )
 }
 
-export default nav;
+export default Nav;
