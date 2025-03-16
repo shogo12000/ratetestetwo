@@ -16,7 +16,7 @@ export async function middleware(request) {
 
   console.log(token);
   console.log("token.........")
-  const res = await fetch(apiUrl, {
+  const res = await fetch('/api/verifytoken', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
