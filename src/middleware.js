@@ -17,7 +17,7 @@ export async function middleware(request) {
   console.log(token);
   console.log("token.........")
   console.log(request.url);
-  const res = await fetch('./api/verifytoken', {
+  const res = await fetch('https://ratetestetwo-otaqlbxhn-shogo12000s-projects.vercel.app/api/verifytoken', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
