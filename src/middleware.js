@@ -24,6 +24,7 @@ export async function middleware(request) {
     },
   });
  
+  console.log("status --- ", res.status);
 
   if(res.status != 200){
    return NextResponse.redirect(new URL('/pageTwo', request.url))
