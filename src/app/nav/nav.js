@@ -1,9 +1,11 @@
 'use client';
 const { default: Link } = require("next/link")
-import { useAuth } from "../context/myContext";
+import { AuthContext } from "../context/myContext";
+import { useContext } from "react";
 
 const nav = ({ children }) => {
-    const { userLogin } = useAuth();
+    // const { userLogin } = useAuth();
+    const { userLogin } = useContext(AuthContext);
     console.log("userLogin", userLogin)
     return (
         <>

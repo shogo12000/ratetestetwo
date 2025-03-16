@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { redirect } from "next/navigation";
  
-const AuthContext = createContext();
+export const AuthContext = createContext();
  
 
 export function AuthProvider({children}){
