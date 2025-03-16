@@ -23,7 +23,8 @@ export async function middleware(request) {
       'Authorization': `Bearer ${token}`,
     },
   });
- 
+  
+  console.log("res", res);
   console.log("status --- ", res.status);
 
   if(res.status != 200){
