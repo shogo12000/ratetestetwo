@@ -12,7 +12,7 @@ export async function POST(req) {
         }
 
         const token = authorization.split(' ')[1]; 
- 
+        console.log("VERIFICANDO token", token);
         try {
             const decoded = jwt.verify(token, SECRET_KEY);
             console.log('Decoded token:', decoded);
