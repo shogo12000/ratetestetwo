@@ -14,6 +14,8 @@ export async function middleware(request) {
 
   const apiUrl = new URL('/api/verifytoken', request.url).toString();
 
+  console.log(token);
+  console.log("token.........")
   const res = await fetch(apiUrl, {
     method: 'POST',
     headers: {
@@ -21,8 +23,6 @@ export async function middleware(request) {
       'Authorization': `Bearer ${token}`,
     },
   });
-
- 
  
 
   if(res.status != 200){
