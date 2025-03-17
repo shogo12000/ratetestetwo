@@ -12,10 +12,11 @@ const Nav = ({ children }) => {
             <nav className="flex justify-between p-5">
                 <div className="flex gap-5">
                     <Link href="/">Home</Link>
+                    <Link href="/allReviews">AllReviews</Link>
                     {userLogin &&
                         <>
-                            <Link href="/pageOne">pageOne</Link>
-                            <Link href="/pageTwo">pageTwo</Link>
+                            <Link href="/pageOne">AddReview</Link>
+                            <Link href="/myReviews">MyReviews</Link>
                         </>
                     }
                 </div>
