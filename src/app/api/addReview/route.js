@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import connectDB from "../db/connectDB";
 import User from "../models/Users";
-import AddReview from "../models/addReview";
+import AddReview from "../models/AddReviewModel";
 import checkToken from "../../libs/checkToken";
  
 
