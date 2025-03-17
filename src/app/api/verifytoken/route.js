@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
 
 export async function POST(req) { 
+    console.log("CHEGOU NO VERIFY TOKEN....")
     try {
         const authorization = req.headers.get('authorization'); 
 
