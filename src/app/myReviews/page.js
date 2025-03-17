@@ -1,7 +1,7 @@
-"use client"
+'use client';
 import { useEffect } from "react";
 
-const pagetTwo = ()=>{
+const PagetTwo = ()=>{
     useEffect(()=>{
         const dataReview = async ()=>{
             const resp = await fetch("/api/showReview");
@@ -11,6 +11,7 @@ const pagetTwo = ()=>{
 
         dataReview();
     },[])
+
     return(
         <div>
             <h1>Page Two</h1>
@@ -18,4 +19,4 @@ const pagetTwo = ()=>{
     )
 }
 
-export default pagetTwo
+export default PagetTwo

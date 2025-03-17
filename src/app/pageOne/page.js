@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import LogoutBtn from "../components/btnLogout"
 import { useState } from 'react';
 
-const pageOne = () => {
+const PageOne = () => {
     const [subTitle, setSubTitle] = useState("");
     const [courseCode, setCourseCode] = useState("");
     const [courseTitle, setCourseTitle] = useState("");
@@ -83,4 +83,4 @@ const pageOne = () => {
     )
 }
 
-export default pageOne
+export default PageOne
