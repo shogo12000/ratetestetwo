@@ -7,6 +7,7 @@ const MyReviews = ()=>{
             const resp = await fetch("/api/showReview");
             const showResp = await resp.json();
             console.log(showResp);
+            console.log(resp);
         }
 
         dataReview();

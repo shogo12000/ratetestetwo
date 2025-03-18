@@ -21,10 +21,11 @@ export function Login({ formType }) {
         402: "User already exists",
         403: "Invalid credentials",
     };
+
     const handleForm = async (e) => {
         e.preventDefault();
  
-
+        setUserDisabled(true);
         try {
             const response = await fetch(`/api/${formType}`, {
                 method: "POST",
@@ -38,11 +39,18 @@ export function Login({ formType }) {
                 })
             })            
 
- 
-            if(response.ok){
+            console.log(response.status);
+            // 201 quando registra sucesso
+
+            if(response.status === 200){
                 console.log("logado sucesso")
                 setUserLogin(true);
+                setUserDisabled(false);
                 router.push("/");
+            }else if (response.status === 201){
+                console.log("usuario cadastrado com sucesso")
+                setUserMessage("Cadastrado com sucesso")
+                
             }else {
                 setUserMessage(messages[response.status]);
             }

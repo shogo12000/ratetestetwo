@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 
 export async function middleware(request) {
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const authCookie = cookieStore.get('auth_token')?.value;
  
 
