@@ -5,7 +5,7 @@ export async function middleware(request) {
   try {
     const cookieStore = cookies();
     const authCookie = cookieStore.get('auth_token')?.value;
-    console.log("MIDDLEWARE..22222222222..")
+ 
 
     if (!authCookie) {
       return NextResponse.redirect(new URL('/', request.url));

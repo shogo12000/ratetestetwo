@@ -1,38 +1,41 @@
 'use client';
-const { default: Link } = require("next/link")
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AuthContext } from "../context/myContext";
 import { useContext } from "react";
 
 const Nav = ({ children }) => {
-    // const { userLogin } = useAuth();
     const { userLogin } = useContext(AuthContext);
-    console.log("userLogin", userLogin)
+    const pathname = usePathname();
+
+    const linkClass = (path) =>
+        pathname === path ? "text-green-500 font-bold" : "text-black";
+
     return (
         <>
             <nav className="flex justify-between p-5">
                 <div className="flex gap-5">
-                    <Link href="/">Home</Link>
-                    <Link href="/allReviews">AllReviews</Link>
-                    {userLogin &&
+                    <Link href="/" className={linkClass("/")}>Home</Link>
+                    <Link href="/allReviews" className={linkClass("/allReviews")}>AllReviews</Link>
+                    {userLogin && (
                         <>
-                            <Link href="/pageOne">AddReview</Link>
-                            <Link href="/myReviews">MyReviews</Link>
+                            <Link href="/pageOne" className={linkClass("/pageOne")}>AddReview</Link>
+                            <Link href="/myReviews" className={linkClass("/myReviews")}>MyReviews</Link>
                         </>
-                    }
+                    )}
                 </div>
                 <div className="flex gap-5">
-                    {!userLogin &&
+                    {!userLogin && (
                         <>
-                            <Link href="/login">Login</Link>
-                            <Link href="/register">Register</Link>
+                            <Link href="/login" className={linkClass("/login")}>Login</Link>
+                            <Link href="/register" className={linkClass("/register")}>Register</Link>
                         </>
-                    }
-                    {/* <Link href="/login" className="text-blue-500">Open modal</Link> */}
+                    )}
                 </div>
             </nav>
             {children}
         </>
-    )
-}
+    );
+};
 
 export default Nav;
