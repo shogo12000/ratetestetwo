@@ -10,7 +10,7 @@ const CheckToken = async () => {
         }
 
         const parsedCookie = JSON.parse(authCookie);
-        console.log(parsedCookie);
+ 
         return parsedCookie.userEmail;
 
     } catch (error) {

@@ -8,8 +8,7 @@ export async function GET() {
 
     const email = await checkToken(); 
 
-    try{
- 
+    try{ 
         const reviews = await Review.find({ userEmail: email });
         return NextResponse.json(reviews, {status: 200});
     }catch(error){

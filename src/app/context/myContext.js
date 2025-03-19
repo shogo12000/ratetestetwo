@@ -18,6 +18,7 @@ export function AuthProvider({children}){
     }
 
     useEffect(()=>{
+        console.log("useeffect da nav")
         const checkCookie = async ()=>{
             try {
                 const res = await fetch("/api/getCookie");
@@ -33,7 +34,7 @@ export function AuthProvider({children}){
             }
         }
         checkCookie();
-    }, [])
+    }, [userLogin])
 
     return (
         <AuthContext value={{ handleLogout, userLogin, setUserLogin }}>

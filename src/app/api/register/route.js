@@ -11,7 +11,7 @@ function hashPassword(password) {
 
 export async function POST(request) {
     await connectDB();
-    console.log("tahn no register");
+  
     try {
         const { userName, userEmail, userPassword } = await request.json();
         console.log(userEmail);

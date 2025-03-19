@@ -14,7 +14,7 @@ function comparePasswords(password, salt, hash) {
 
 const generateToken = (email) => {
     const payload = { email };
-    return jwt.sign(payload, SECRET_KEY, { expiresIn: '10h' }); 
+    return jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' }); 
 };
 
 export async function POST(req) {
@@ -45,7 +45,7 @@ export async function POST(req) {
             secure: process.env.APP_ENV === 'production',   
             path: '/',       
             sameSite: 'strict',  
-            maxAge: 36000,       
+            maxAge: 60 * 60,       
         })
 
         response.cookies.set({
@@ -54,7 +54,7 @@ export async function POST(req) {
             httpOnly: false,  // Permite acesso no frontend
             secure: process.env.APP_ENV === "production",
             sameSite: "Lax",
-            maxAge: 60 * 60 * 10,
+            maxAge: 60 * 60 ,
             path: "/",
         });
 
@@ -64,7 +64,7 @@ export async function POST(req) {
             httpOnly: false,  // Permite acesso no frontend
             secure: process.env.APP_ENV === "production",
             sameSite: "Lax",
-            maxAge: 60 * 60 * 10,
+            maxAge: 60 * 60  ,
             path: "/",
         });
 
