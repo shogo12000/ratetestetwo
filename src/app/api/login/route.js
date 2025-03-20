@@ -64,7 +64,7 @@ export async function POST(req) {
             httpOnly: false,  // Permite acesso no frontend
             secure: process.env.APP_ENV === "production",
             sameSite: "Lax",
-            maxAge: 60 * 60  ,
+            maxAge: 60 * 60 ,
             path: "/",
         });
 

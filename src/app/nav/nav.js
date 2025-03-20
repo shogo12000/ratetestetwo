@@ -2,14 +2,28 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AuthContext } from "../context/myContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const Nav = ({ children }) => {
-    const { userLogin } = useContext(AuthContext);
+    const { userLogin, setUserLogin } = useContext(AuthContext);
     const pathname = usePathname();
 
     const linkClass = (path) =>
         pathname === path ? "text-green-500 font-bold" : "text-black";
+
+    useEffect(() => {
+        const checkCookie = async () => {
+            const response = await fetch("/api/getCookie");
+            const check = await response.json();
+            console.log(check.userEmail);
+            if (!check.userEmail) {
+                setUserLogin(false);
+            }
+
+        }
+
+        checkCookie();
+    }, [pathname])
 
     return (
         <>
