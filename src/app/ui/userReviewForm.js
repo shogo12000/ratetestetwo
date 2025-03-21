@@ -34,9 +34,23 @@ const UserReviewForm = ({ userId }) => {
     };
 
     fetchData();
-  }, [userId]); // Adiciona userId como dependência para refazer a busca quando mudar
+  }, [userId]);  
 
-  // Função para lidar com a alteração dos campos
+ 
+  const handleSaveBtn = async () => { 
+    try{
+      const  resp  = await updateReview(reviewData) 
+      if( resp.ok ){
+        contextMyReview();     
+        router.back();   
+      }else{
+        throw new Error("Error Please try again!!");
+      }
+    }catch(error){
+      throw error;
+    }  
+  }
+
   const handleFieldChange = (e) => {
     console.log(e)
     const { name, value } = e.target;
@@ -45,19 +59,6 @@ const UserReviewForm = ({ userId }) => {
       [name]: value,
     }));
   };
-
-  const handleSaveBtn = async () => { 
-    try{
-      const  resp  = await updateReview(reviewData) 
-      if( resp.ok ){
-        contextMyReview();        
-      }else{
-        throw new Error("Error Please try again!!");
-      }
-    }catch(error){
-      throw error;
-    }  
-  }
 
   return (
     <>

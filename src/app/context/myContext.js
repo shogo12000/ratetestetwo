@@ -42,12 +42,10 @@ export function AuthProvider({ children }) {
         return () => clearInterval(interval);
     }, [])
 
-    const contextMyReview = async ()=>{
-        console.log("Executando o context review");
-        const resp = await fetch("/api/showUserReview");
+    const contextMyReview = async ()=>{ 
+        const resp = await fetch("/api/showUserReview" );
         const data = await resp.json();
-        setUserDataReview(data);
-   
+        setUserDataReview(data);   
     }
 
     return (

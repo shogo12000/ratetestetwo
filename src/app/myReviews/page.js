@@ -20,6 +20,24 @@ const MyReviews = () => {
         router.push(`/userReview?id=${id}`)
     }
 
+    const handleDeleteBtn = async (id)=>{
+        try {
+            console.log("btn delete ", id);
+            const response = await fetch(`/api/getDeleteReview?reviewId=${id}`)
+
+            if (response.ok) {
+                console.log("Revisão deletada com sucesso!");
+                await contextMyReview(); 
+                // Atualizar o estado da interface, se necessário
+            } else {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Erro ao deletar a revisão");
+            }
+        } catch (error) {
+            throw error;
+        }
+    }   
+
     return (
         <div> 
             {userDataReview.length > 0 ? (
@@ -66,6 +84,7 @@ const MyReviews = () => {
                             Edit
                         </button> 
                         <button
+                            onClick={() => handleDeleteBtn(data._id)}
                             className="bg-gray-300 p-2 rounded-xl"
                         >Delete</button>
                     </div>

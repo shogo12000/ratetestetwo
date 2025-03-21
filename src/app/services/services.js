@@ -1,5 +1,4 @@
 
-
 export const getUserReview = async (userId)=>{
     try {
         const resp = await fetch(`/api/getUserReview?userId=${userId}`);
@@ -15,7 +14,7 @@ export const getUserReview = async (userId)=>{
 }
 
 export const updateReview = async (data)=>{
-  console.log(data);
+ 
   try{
     const response = await fetch("/api/postUpdateReview", {
       method: "POST",
@@ -32,6 +31,15 @@ export const updateReview = async (data)=>{
     } 
   }catch (error){
     console.log("Erro: ", error);
+    throw error;
+  }
+}
+
+export const deleteReview = async (data)=>{
+  try{
+
+  }catch(error){
+    console.log("Error: ", error);
     throw error;
   }
 }
