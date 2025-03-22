@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { redirect } from "next/navigation";
+import { getAllReviews, searchData } from "../services/services";
 
 export const AuthContext = createContext();
 
@@ -8,6 +9,7 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
     const [userLogin, setUserLogin] = useState(false);
     const [userDataReview, setUserDataReview] = useState({});
+    const [ dataSearch , setDataSearch ] = useState([])
 
     const handleLogout = async () => {
         await fetch("/api/logout", {
@@ -16,6 +18,40 @@ export function AuthProvider({ children }) {
         });
         setUserLogin(false);
         redirect("/");
+    }
+
+    const getSearchData = async(findWord)=>{
+        console.log(findWord);
+        if(!findWord){  
+            try {
+                const response = await getAllReviews();
+
+                if (!response.ok) {
+                    throw new Error("error try again!!!");
+                }
+
+                const data = await response.json();
+                console.log(data);
+                setDataSearch(data);
+
+            } catch (error) {
+                setPageError(true)
+            }
+        }else{
+            try{
+                const response = await searchData(findWord);
+    
+                if(response.ok){
+                    const mySearch = await response.json();
+                    setDataSearch(mySearch);
+                }else{
+                    console.log("error");
+                }
+            }catch(error){
+                throw error;
+            }
+        }
+
     }
 
     useEffect(() => {
@@ -49,7 +85,7 @@ export function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext value={{ handleLogout, userLogin, setUserLogin, contextMyReview, userDataReview}}>
+        <AuthContext value={{ handleLogout, userLogin, setUserLogin, contextMyReview, userDataReview, getSearchData, dataSearch}}>
             {children}
         </AuthContext>
     )

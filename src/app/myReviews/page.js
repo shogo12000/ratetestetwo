@@ -1,45 +1,48 @@
 'use client';
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import { AuthContext } from "../context/myContext";
 import { useContext } from "react";
+import { deleteReview } from "../services/services"
 
-const MyReviews = () => { 
- 
-    const router = useRouter(); 
+const MyReviews = () => {
+
+    const router = useRouter();
     const { contextMyReview, userDataReview } = useContext(AuthContext);
 
     useEffect(() => {
-        const fetchReviews = async () => { 
-            await contextMyReview();  
-        }; 
+        const fetchReviews = async () => {
+            await contextMyReview();
+        };
         fetchReviews();
-    }, []); 
+    }, []);
 
-    const editChange = (id)=>{
+    const editChange = (id) => {
         router.push(`/userReview?id=${id}`)
     }
 
-    const handleDeleteBtn = async (id)=>{
+    const handleDeleteBtn = async (id) => {
         try {
-            console.log("btn delete ", id);
-            const response = await fetch(`/api/getDeleteReview?reviewId=${id}`)
 
+            const response = await deleteReview(id);
+     
+            console.log(response);
             if (response.ok) {
                 console.log("Revisão deletada com sucesso!");
                 await contextMyReview(); 
                 // Atualizar o estado da interface, se necessário
             } else {
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Erro ao deletar a revisão");
+ 
+                throw new Error("Erro ao deletar a revisão");
             }
+ 
         } catch (error) {
             throw error;
         }
-    }   
+    }
 
     return (
-        <div> 
+        <div>
             {userDataReview.length > 0 ? (
                 userDataReview.map((data, index) => (
                     <div key={index} className="p-4 border-b border-gray-300">
@@ -77,12 +80,12 @@ const MyReviews = () => {
                             value={data.createdAt}
                             onChange={(e) => handleChange(index, "createdAt", e.target.value)}
                             readOnly={true}
-                        /> 
+                        />
                         <button
                             onClick={() => editChange(data._id)}
                             className="bg-gray-300 p-2 rounded-xl">
                             Edit
-                        </button> 
+                        </button>
                         <button
                             onClick={() => handleDeleteBtn(data._id)}
                             className="bg-gray-300 p-2 rounded-xl"
